@@ -11,13 +11,10 @@ export class PaymentForm extends LitElement {
   static get styles() {
     return css`
       :host {
-        display: block;
-        border: solid 1px gray;
-        padding: 16px;
-        max-width: 800px;
-      }
-
-      body {
+        //display: block;
+        //border: solid 1px gray;
+        //padding: 16px;
+        //max-width: 1200px;
         margin: 0;
         padding: 0;
         background-color: #f9f9f9;
@@ -35,7 +32,7 @@ export class PaymentForm extends LitElement {
         min-height: 100vh;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-        font-family: 'Raleway';
+        font-family: 'Tahoma';
       }
 
       .payment-title {
@@ -378,7 +375,6 @@ export class PaymentForm extends LitElement {
         -webkit-transform: rotateY(180deg);
         transform: rotateY(180deg);
       }
-
     `;
   }
 
