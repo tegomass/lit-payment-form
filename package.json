@@ -14,10 +14,10 @@
     "build": "vite build"
   },
   "dependencies": {
-    "lit": "^2.0.2"
+    "lit": "^2.0.2",
+    "imask": "^6.4.2"
   },
   "devDependencies": {
-    "imask": "^6.4.2",
     "vite": "^2.9.9"
   }
 }

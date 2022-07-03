@@ -28,7 +28,7 @@ export class PaymentForm extends LitElement {
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
-        min-height: 100vh;
+        //min-height: 100vh;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
         font-family: Tahoma, monospace;
@@ -142,6 +142,7 @@ export class PaymentForm extends LitElement {
         background-color: #909090;
         border-radius: 4px;
       }
+
 
       /* CHANGEABLE CARD ELEMENTS */
 
@@ -369,6 +370,20 @@ export class PaymentForm extends LitElement {
       .creditcard.flipped {
         transform: rotateY(180deg);
       }
+
+      #checkout {
+        cursor: pointer;
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 20px;
+        background-color: #0097a7;
+        border-radius: 4px;
+        border: 0
+      }
+
+      #checkout:hover {
+        background-color: #00616c;
+      }
     `;
   }
 
@@ -541,7 +556,7 @@ export class PaymentForm extends LitElement {
         case 'visa':
           this.ccicon.innerHTML = this.visa;
           this.ccsingle.innerHTML = this.visa_single;
-          this.swapColor('lime');
+          this.swapColor('lightblue');
           break;
         case 'diners':
           this.ccicon.innerHTML = this.diners;
@@ -566,7 +581,7 @@ export class PaymentForm extends LitElement {
         case 'mastercard':
           this.ccicon.innerHTML = this.mastercard;
           this.ccsingle.innerHTML = this.mastercard_single;
-          this.swapColor('lightblue');
+          this.swapColor('lime');
 
           break;
         case 'unionpay':
@@ -846,9 +861,7 @@ export class PaymentForm extends LitElement {
                 <input @focus=${this.flipCard.bind(this, true)} id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
             </div>
             <div class="field-container">
-                <button @click=${this._onClick}>
-                    Checkout
-                </button>
+                <button @click=${this._onClick} id="checkout">Checkout</button>
             </div>
         </div>
     `;
