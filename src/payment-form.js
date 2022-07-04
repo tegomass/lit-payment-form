@@ -31,7 +31,8 @@ export class PaymentForm extends LitElement {
         //min-height: 100vh;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-        font-family: Tahoma, monospace;
+        text-align: left;
+        font-family: Arial, monospace;
       }
 
       .payment-title {
