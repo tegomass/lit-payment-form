@@ -2,12 +2,12 @@ import { html, css, LitElement } from 'lit';
 import IMask from 'imask';
 
 /**
- * Payment Form Element.
+ * Lit Payment Form Element.
  *
  * @slot - This element has a slot
  * @csspart button - The button
  */
-export class PaymentForm extends LitElement {
+export class LitPaymentForm extends LitElement {
   static get styles() {
     return css`
       :host {
@@ -638,15 +638,15 @@ export class PaymentForm extends LitElement {
   randomCard() {
     let testCards = [
       '4242424242424242',
-      '4000000000003063'
-      // '4000056655665556',
-      // '5200828282828210',
-      // '371449635398431',
-      // '6011000990139424',
-      // '30569309025904',
-      // '3566002020360505',
-      // '6200000000000005',
-      // '6759649826438453',
+      '4000000000003063',
+      '4000056655665556',
+      '5200828282828210',
+      '371449635398431',
+      '6011000990139424',
+      '30569309025904',
+      '3566002020360505',
+      '6200000000000005',
+      '6759649826438453',
     ];
     let randomNumber = Math.floor(Math.random() * testCards.length);
     this.cardnumber_mask.unmaskedValue = testCards[randomNumber];
@@ -738,9 +738,7 @@ export class PaymentForm extends LitElement {
   render() {
     return html`
         <div class="payment-title">
-            <h1>
-                <slot></slot>
-            </h1>
+            <slot></slot>
         </div>
         <div class="container preload">
             <div @click=${this.flipCard} class="creditcard">
@@ -871,5 +869,5 @@ export class PaymentForm extends LitElement {
 
 }
 
-window.customElements.define('payment-form', PaymentForm);
+window.customElements.define('lit-payment-form', LitPaymentForm);
 

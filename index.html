@@ -4,12 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Payment widget</title>
-    <script type="module" src="/src/payment-form.js"></script>
+    <title>Lit payment form</title>
+    <script type="module" src="/src/lit-payment-form.js"></script>
   </head>
   <body>
-    <payment-form>
-      Payment information
-    </payment-form>
+    <lit-payment-form>
+      Title here
+    </lit-payment-form>
   </body>
+  <script>
+    document.querySelector('lit-payment-form').addEventListener('checkoutform', (e) => {
+      console.log('form details', e.detail);
+    })
+  </script>
 </html>
