@@ -1,7 +1,6 @@
 {
-  "name": "payment-form",
-  "private": true,
-  "version": "0.0.0",
+  "name": "lit-payment-form",
+  "version": "0.1.0",
   "main": "dist/payment-form.es.js",
   "exports": {
     ".": "./dist/payment-form.es.js"
@@ -14,8 +13,8 @@
     "build": "vite build"
   },
   "dependencies": {
-    "lit": "^2.0.2",
-    "imask": "^6.4.2"
+    "imask": "^6.4.2",
+    "lit": "^2.0.2"
   },
   "devDependencies": {
     "vite": "^2.9.9"
