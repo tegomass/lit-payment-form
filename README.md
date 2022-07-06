@@ -5,6 +5,10 @@ by [Adam Quinlan](https://codepen.io/quinlo) on CodePen.
 
 ![image](https://user-images.githubusercontent.com/25712863/177168509-7bee5221-9dbb-4345-9f48-30951c8c5a4b.png)
 
+## Demo
+
+[Demo on StackBlitz](https://stackblitz.com/edit/lit-payment-form)
+
 # Installation
 
 ```sh
@@ -33,9 +37,9 @@ Bind a function to the @checkoutform event to trigger the function on click on t
     <script type="module" src="/src/lit-payment-form.js"></script>
 </head>
 <body>
-<payment-form>
+<lit-payment-form>
     Title here
-</payment-form>
+</lit-payment-form>
 </body>
 <script>
     document.querySelector('payment-form').addEventListener('checkoutform', (e) => {
