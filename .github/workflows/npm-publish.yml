@@ -10,10 +10,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Setup nodejs
+      - name: Install nodejs
         uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Install dependencies
+        run: npm install
       - name: Build the project
         run: npm run build
       - name: List files in the repository
