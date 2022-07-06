@@ -652,62 +652,10 @@ export class LitPaymentForm extends LitElement {
     this.cardnumber_mask.unmaskedValue = testCards[randomNumber];
   }
 
-  setCardIcon() {
-    console.log(this.cardnumber_mask.masked.currentMask.cardtype);
-    switch (this.cardnumber_mask.masked.currentMask.cardtype) {
-      case 'american express':
-        this.ccicon.innerHTML = this.amex;
-        this.ccsingle.innerHTML = this.amex_single;
-        this.swapColor('green');
-        break;
-      case 'visa':
-        this.ccicon.innerHTML = this.visa;
-        this.ccsingle.innerHTML = this.visa_single;
-        this.swapColor('lime');
-        break;
-      case 'diners':
-        this.ccicon.innerHTML = this.diners;
-        this.ccsingle.innerHTML = this.diners_single;
-        this.swapColor('orange');
-        break;
-      case 'discover':
-        this.ccicon.innerHTML = this.discover;
-        this.ccsingle.innerHTML = this.discover_single;
-        this.swapColor('purple');
-        break;
-      case ('jcb' || 'jcb15'):
-        this.ccicon.innerHTML = this.jcb;
-        this.ccsingle.innerHTML = this.jcb_single;
-        this.swapColor('red');
-        break;
-      case 'maestro':
-        this.ccicon.innerHTML = this.maestro;
-        this.ccsingle.innerHTML = this.maestro_single;
-        this.swapColor('yellow');
-        break;
-      case 'mastercard':
-        this.ccicon.innerHTML = this.mastercard;
-        this.ccsingle.innerHTML = this.mastercard_single;
-        this.swapColor('lightblue');
-        break;
-      case 'unionpay':
-        this.ccicon.innerHTML = this.unionpay;
-        this.ccsingle.innerHTML = this.unionpay_single;
-        this.swapColor('cyan');
-        break;
-      default:
-        this.ccicon.innerHTML = '';
-        this.ccsingle.innerHTML = '';
-        this.swapColor('grey');
-        break;
-    }
-  }
-
   reflectName(e) {
-    console.log(`TEGOLOG [e.target.ve]`, e.target.value);
     if (e.target.value.length === 0) {
-      this.shadowRoot.getElementById('svgname').innerHTML = 'John Doe';
-      this.shadowRoot.getElementById('svgnameback').innerHTML = 'John Doe';
+      this.shadowRoot.getElementById('svgname').innerHTML = `JOHN DOE`;
+      this.shadowRoot.getElementById('svgnameback').innerHTML = `JOHN DOE`;
     } else {
       this.shadowRoot.getElementById('svgname').innerHTML = e.target.value;
       this.shadowRoot.getElementById('svgnameback').innerHTML = e.target.value;
