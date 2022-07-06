@@ -34,7 +34,7 @@ Bind a function to the @checkoutform event to trigger the function on click on t
 <html lang="en">
 <head>
     <title>Payment form</title>
-    <script type="module" src="/src/lit-payment-form.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/lit-payment-form@0.2.0/dist/lit-payment-form.es.js"></script>
 </head>
 <body>
 <lit-payment-form>
