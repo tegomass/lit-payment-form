@@ -1,6 +1,6 @@
 {
   "name": "lit-payment-form",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "main": "dist/lit-payment-form.es.js",
   "exports": {
     ".": "./dist/lit-payment-form.es.js"
