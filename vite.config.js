@@ -17,8 +17,13 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
-    outputFile: "coverage/junit.xml",
-
+    coverage: {
+      reporter: ['lcov'], //https://github.com/bcoe/c8/issues/71
+      // exclude: [
+      //   'node_modules/',
+      //   'src/setupTests.ts',
+      // ],
+    },
   },
 
 })
