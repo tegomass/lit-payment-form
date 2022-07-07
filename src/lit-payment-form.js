@@ -493,11 +493,6 @@ export class LitPaymentForm extends LitElement {
           regex: '^(?:5[0678]\\d{0,2}|6304|67\\d{0,2})\\d{0,12}',
           cardtype: 'maestro'
         },
-        // {
-        //     mask: '0000-0000-0000-0000',
-        //     regex: '^220[0-4]\\d{0,12}',
-        //     cardtype: 'mir'
-        // },
         {
           mask: '0000 0000 0000 0000',
           regex: '^4\\d{0,15}',
@@ -584,7 +579,6 @@ export class LitPaymentForm extends LitElement {
           this.ccicon.innerHTML = this.mastercard;
           this.ccsingle.innerHTML = this.mastercard_single;
           this.swapColor('lime');
-
           break;
         case 'unionpay':
           this.ccicon.innerHTML = this.unionpay;
@@ -672,7 +666,6 @@ export class LitPaymentForm extends LitElement {
   }
 
   _onClick() {
-    console.log(`TEGOLOG [this.cardnumber.value]`, this.cardnumber.value);
     this.dispatchEvent(new CustomEvent('checkoutform', {
       detail: {
         name: this.name.value,
@@ -814,7 +807,6 @@ export class LitPaymentForm extends LitElement {
         </div>
     `;
   }
-
 }
 
 window.customElements.define('lit-payment-form', LitPaymentForm);

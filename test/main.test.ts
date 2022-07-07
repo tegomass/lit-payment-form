@@ -7,8 +7,8 @@ declare global {
     interface Window extends IWindow {
     }
 }
-
-describe('Button with increment', async () => {
+//https://devhints.io/chai
+describe('main cases', async () => {
     beforeEach(async () => {
         document.body.innerHTML = '<lit-payment-form>pay here</lit-payment-form>';
         await window.happyDOM.whenAsyncComplete();
@@ -31,22 +31,39 @@ describe('Button with increment', async () => {
         return getLitPaymentForm()?.shadowRoot?.querySelector('#cardnumber');
     }
 
-    function getSecurityCodeInput(): HTMLInputElement | null | undefined {
+    function getCvvInput(): HTMLInputElement | null | undefined {
         return getLitPaymentForm()?.shadowRoot?.querySelector('#securitycode');
+    }
+
+    function getExpirationInput(): HTMLInputElement | null | undefined {
+        return getLitPaymentForm()?.shadowRoot?.querySelector('#expirationdate');
     }
 
     function getGenerateCardButton(): HTMLElement | null | undefined {
         return getLitPaymentForm()?.shadowRoot?.querySelector('#generatecard');
     }
 
-    function getCreditCard(): HTMLElement | null | undefined {
+    function getCreditCardUI(): HTMLElement | null | undefined {
         return getLitPaymentForm()?.shadowRoot?.querySelector('.creditcard');
     }
 
-    function getCreditCardName(): HTMLElement | null | undefined {
+    function getCreditCardNameUI(): HTMLElement | null | undefined {
         return getLitPaymentForm()?.shadowRoot?.querySelector('#svgname');
     }
 
+    function getCardNumberUI(): HTMLElement | null | undefined {
+        return getLitPaymentForm()?.shadowRoot?.querySelector('#svgnumber');
+    }
+    function getCreditCardExpirationUI(): HTMLElement | null | undefined {
+        return getLitPaymentForm()?.shadowRoot?.querySelector('#svgexpire');
+    }
+    function getCreditCardCvvUI(): HTMLElement | null | undefined {
+        return getLitPaymentForm()?.shadowRoot?.querySelector('#svgsecurity');
+    }
+
+    // function getCreditCardNameBackUI(): HTMLElement | null | undefined {
+    //     return getLitPaymentForm()?.shadowRoot?.querySelector('#svgnameback');
+    // }
 
     it('should set the value when input value', () => {
         getNameInput().value = 'John Smith';
@@ -54,13 +71,13 @@ describe('Button with increment', async () => {
     });
 
     it('should reflect default card name', () => {
-        expect(getCreditCardName().innerText).toEqual('JOHN DOE');
+        expect(getCreditCardNameUI().innerText).toEqual('JOHN DOE');
     });
 
     it('should reflect card name after changing', () => {
         getNameInput().value = 'Will Smith';
         getNameInput().dispatchEvent(new Event('input'));
-        expect(getCreditCardName().innerText).toEqual('Will Smith');
+        expect(getCreditCardNameUI().innerText).toEqual('Will Smith');
     });
 
     it('should reflect default card name after changing', () => {
@@ -68,39 +85,26 @@ describe('Button with increment', async () => {
         getNameInput().dispatchEvent(new Event('input'));
         getNameInput().value = '';
         getNameInput().dispatchEvent(new Event('input'));
-        expect(getCreditCardName().innerText).toEqual('JOHN DOE');
+        expect(getCreditCardNameUI().innerText).toEqual('JOHN DOE');
     });
 
     it('should flip card', () => {
-        getSecurityCodeInput().dispatchEvent(new Event('focus'));
-        expect(getCreditCard().className).toContain('flipped');
+        getCvvInput().dispatchEvent(new Event('focus'));
+        expect(getCreditCardUI().className).toContain('flipped');
     });
 
     it('should flip card back', () => {
-        getSecurityCodeInput().dispatchEvent(new Event('focus'));
+        getCvvInput().dispatchEvent(new Event('focus'));
         getNameInput().dispatchEvent(new Event('focus'));
         // getCreditCardButton().click();
         // getCreditCardButton().click();
-        expect(getCreditCard().className).to.not.contain('flipped');
+        expect(getCreditCardUI().className).to.not.contain('flipped');
     });
 
     it('should generate a random cardnumber', () => {
         getGenerateCardButton().click();
-        let testCards = [
-            '4242424242424242',
-            '4000000000003063',
-            '4000056655665556',
-            '5200828282828210',
-            '371449635398431',
-            '6011000990139424',
-            '30569309025904',
-            '3566002020360505',
-            '6200000000000005',
-            '6759649826438453',
-        ];
         let cardWithoutSpaces = getCardNumberInput()?.value.replace(/ /g, '');
-        expect(cardWithoutSpaces).to.be.oneOf(testCards);
-        // expect(getCardNumberInput()?.value).toHaveLength(10);
+        expect(cardWithoutSpaces.length).to.be.gte(14);
     });
 
     it('should dispatch checkoutform event on button [checkout] click', () => {
@@ -129,5 +133,86 @@ describe('Button with increment', async () => {
         getNameInput().value = 'John DOE';
         getCheckoutButton().click();
         expect(checkout).toMatchObject({name: 'John DOE', cardnumber: '', expirationdate: '', securitycode: ''});
+    });
+    describe('Testing UI values', async () => {
+        it('should display [42] ', () => {
+            getCardNumberInput().value = '42';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            getCardNumberInput().value = '';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            getCardNumberInput().value = '42';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getCardNumberUI().innerText).to.be.equal('42');
+        })
+        it('should display [12/26] ', () => {
+            getExpirationInput().value = '1226';
+            getExpirationInput().dispatchEvent(new Event('input'));
+            getExpirationInput().value = '';
+            getExpirationInput().dispatchEvent(new Event('input'));
+            getExpirationInput().value = '1226';
+            getExpirationInput().dispatchEvent(new Event('input'));
+            expect(getCreditCardExpirationUI().innerText).to.be.equal('12/26');
+        })
+        it('should display [985] ', () => {
+            getCvvInput().value = '985';
+            getCvvInput().dispatchEvent(new Event('input'));
+            getCvvInput().value = '';
+            getCvvInput().dispatchEvent(new Event('input'));
+            getCvvInput().value = '985';
+            getCvvInput().dispatchEvent(new Event('input'));
+            expect(getCreditCardCvvUI().innerText).to.be.equal('985');
+        })
+    });
+    describe('Testing all cards combinations', async () => {
+        it('should display [american express] logo card', () => {
+            getCardNumberInput().value = '371449635398431';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getLitPaymentForm()?.shadowRoot?.querySelector('#amex')).to.exist;
+        });
+        it('should display [discover] logo card', () => {
+            getCardNumberInput().value = '6011000990139424';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getLitPaymentForm()?.shadowRoot?.querySelector('#discover')).to.exist;
+        });
+        it('should display [diners] logo card', () => {
+            getCardNumberInput().value = '30569309025904';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getLitPaymentForm()?.shadowRoot?.querySelector('#diners')).to.exist;
+        });
+        it('should display [mastercard] logo card', () => {
+            getCardNumberInput().value = '5200828282828210';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getLitPaymentForm()?.shadowRoot?.querySelector('#mastercard')).to.exist;
+        });
+        it('should display [jcb] logo card', () => {
+            getCardNumberInput().value = '3566002020360505';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getLitPaymentForm()?.shadowRoot?.querySelector('#jcb')).to.exist;
+        });
+        // it('should display [jcb15] logo card', () => {
+        //     getCardNumberInput().value = '180078244412845';
+        //     getCardNumberInput().dispatchEvent(new Event('input'));
+        //     expect(getLitPaymentForm()?.shadowRoot?.querySelector('#jcb')).to.exist;
+        // });
+        it('should display [maestro] logo card', () => {
+            getCardNumberInput().value = '6759649826438453';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getLitPaymentForm()?.shadowRoot?.querySelector('#maestro')).to.exist;
+        });
+        it('should display [visa] logo card', () => {
+            getCardNumberInput().value = '4242424242424242';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getLitPaymentForm()?.shadowRoot?.querySelector('#visa')).to.exist;
+        });
+        it('should display [unionpay] logo card', () => {
+            getCardNumberInput().value = '6200000000000005';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getLitPaymentForm()?.shadowRoot?.querySelector('#unionpay')).to.exist;
+        });
+        it('should display no logo card', async () => {
+            getCardNumberInput().value = '1111111111111111';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getLitPaymentForm()?.shadowRoot?.querySelector('.lightcolor.grey')).to.exist;
+        });
     });
 });
