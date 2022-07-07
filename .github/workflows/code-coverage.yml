@@ -22,4 +22,5 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: ./coverage/junit.xml # optional
+          directory: ./coverage/
+          files: ./junit.xml
