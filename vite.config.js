@@ -17,6 +17,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
- },
+    outputFile: "coverage/junit.xml",
+
+  },
 
 })

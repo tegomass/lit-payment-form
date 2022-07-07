@@ -12,7 +12,7 @@
     "dev": "vite",
     "build": "vite build",
     "test": "vitest",
-    "coverage": "vitest run --coverage",
+    "coverage": "vitest run --coverage --reporter=junit",
     "test:ui": "vitest --ui"
   },
   "dependencies": {
