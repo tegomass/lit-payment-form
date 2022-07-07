@@ -1,6 +1,6 @@
 {
   "name": "lit-payment-form",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "dist/lit-payment-form.es.js",
   "exports": {
     ".": "./dist/lit-payment-form.es.js"
@@ -25,5 +25,10 @@
     "happy-dom": "latest",
     "vite": "^2.9.9",
     "vitest": "^0.17.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tegomass/lit-payment-form.git"
+  },
+  "homepage": "https://github.com/tegomass/lit-payment-form#readme"
 }
