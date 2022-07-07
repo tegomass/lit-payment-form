@@ -93,14 +93,21 @@ describe('main cases', async () => {
         expect(getCreditCardUI().className).toContain('flipped');
     });
 
+    it('shouldn\'t flip card', () => {
+        getCardNumberInput().dispatchEvent(new Event('focus'));
+        expect(getCardNumberUI().className).not.toContain('flipped');
+    });
+
     it('should flip card back', () => {
         getCvvInput().dispatchEvent(new Event('focus'));
         getNameInput().dispatchEvent(new Event('focus'));
-        // getCreditCardButton().click();
-        // getCreditCardButton().click();
         expect(getCreditCardUI().className).to.not.contain('flipped');
     });
-
+    it('shouldn\'t flip card back', () => {
+        getCvvInput().dispatchEvent(new Event('focus'));
+        getCvvInput().dispatchEvent(new Event('focus'));
+        expect(getCreditCardUI().className).to.contain('flipped');
+    });
     it('should generate a random cardnumber', () => {
         getGenerateCardButton().click();
         let cardWithoutSpaces = getCardNumberInput()?.value.replace(/ /g, '');
@@ -189,11 +196,11 @@ describe('main cases', async () => {
             getCardNumberInput().dispatchEvent(new Event('input'));
             expect(getLitPaymentForm()?.shadowRoot?.querySelector('#jcb')).to.exist;
         });
-        // it('should display [jcb15] logo card', () => {
-        //     getCardNumberInput().value = '180078244412845';
-        //     getCardNumberInput().dispatchEvent(new Event('input'));
-        //     expect(getLitPaymentForm()?.shadowRoot?.querySelector('#jcb')).to.exist;
-        // });
+        it('should display [jcb15] logo card', () => {
+            getCardNumberInput().value = '180078244412845';
+            getCardNumberInput().dispatchEvent(new Event('input'));
+            expect(getLitPaymentForm()?.shadowRoot?.querySelector('#jcb')).to.exist;
+        });
         it('should display [maestro] logo card', () => {
             getCardNumberInput().value = '6759649826438453';
             getCardNumberInput().dispatchEvent(new Event('input'));

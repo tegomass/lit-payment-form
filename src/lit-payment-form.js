@@ -510,13 +510,15 @@ export class LitPaymentForm extends LitElement {
       ],
       dispatch: function(appended, dynamicMasked) {
         const number = (dynamicMasked.value + appended).replace(/\D/g, '');
-
+        let dispatch;
         for (let i = 0; i < dynamicMasked.compiledMasks.length; i++) {
           let re = new RegExp(dynamicMasked.compiledMasks[i].regex);
           if (number.match(re) != null) {
-            return dynamicMasked.compiledMasks[i];
+            dispatch = dynamicMasked.compiledMasks[i];
+            break;
           }
         }
+        return dispatch;
       }
     });
     this.expirationdate_mask = new IMask(this.expirationdate, {
@@ -565,7 +567,8 @@ export class LitPaymentForm extends LitElement {
           this.ccsingle.innerHTML = this.discover_single;
           this.swapColor('purple');
           break;
-        case ('jcb' || 'jcb15'):
+        case 'jcb':
+        case 'jcb15':
           this.ccicon.innerHTML = this.jcb;
           this.ccsingle.innerHTML = this.jcb_single;
           this.swapColor('red');
@@ -661,8 +664,8 @@ export class LitPaymentForm extends LitElement {
     const haveForcedState = arguments.length > 1;
     const className = 'flipped';
     return $creditCardClasses.contains(className) ?
-      haveForcedState && state ? '' : $creditCardClasses.remove(className) :
-      haveForcedState && !state ? '' : $creditCardClasses.add(className);
+      (haveForcedState && state ? '' : $creditCardClasses.remove(className)) :
+      (haveForcedState && !state ? '' : $creditCardClasses.add(className));
   }
 
   _onClick() {
